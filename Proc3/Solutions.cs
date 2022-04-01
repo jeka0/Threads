@@ -23,12 +23,14 @@ namespace Proc3
             Random random = new Random();
             for (int i = 0; i < a.Length; i++) a[i] = random.NextDouble()*100;
         }
-        public void OneThreadSolution()
+        public void OneThreadSolution() { OneThreadSolution(K);}
+        public void OneThreadSolution(int K)
         {
             Action action = new Action(a,K);
             action.DO(new int[]{0 ,a.Length});
         }
-        public void SolutionByMultipleThreads(int num)
+        public void SolutionByMultipleThreads(int num) { SolutionByMultipleThreads(num, K); }
+        public void SolutionByMultipleThreads(int num, int K)
         {
             Action action =  new Action(a, K);
             List<Thread> threads = new List<Thread>();
@@ -42,5 +44,6 @@ namespace Proc3
             }
             foreach (Thread nowThread in threads) nowThread.Join(); 
         }
+        
     }
 }
